@@ -10,4 +10,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query(value = "Select * from post where user_id = ?", nativeQuery = true)
     List<Post> findByUserId(Integer userId);
+
+
 }

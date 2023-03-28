@@ -35,8 +35,15 @@ public class Post {
     @ManyToMany(mappedBy = "likes")
     private Set<SpringUser> likes = new LinkedHashSet<>();
 
-    public Post(String message, LocalDateTime timestamp) {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private SpringUser springUser;
+
+    public Post(String message, LocalDateTime timestamp, SpringUser springUser) {
         this.message = message;
         this.timestamp = timestamp;
+        this.springUser = springUser;
     }
+
+
 }

@@ -12,4 +12,10 @@ public interface PostService {
     List<Post> getPostsFromFollowedUsers();
 
     void deleteById(Integer id);
+
+    List<Post> getMyPosts();
+
+    void save(Post post);
+
+    void copyPost(Integer id);
 }

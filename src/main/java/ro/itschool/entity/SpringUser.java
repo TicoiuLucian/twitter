@@ -72,8 +72,7 @@ public class SpringUser implements UserDetails {
     )
     private List<SpringUser> followedUsers = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "springUser")
     private Set<Post> posts = new LinkedHashSet<>();
 
 
