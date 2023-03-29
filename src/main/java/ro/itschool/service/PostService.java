@@ -18,4 +18,6 @@ public interface PostService {
     void save(Post post);
 
     void copyPost(Integer id);
+
+    List<Post> getPostsWithMention();
 }

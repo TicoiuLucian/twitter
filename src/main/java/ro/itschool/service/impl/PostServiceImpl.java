@@ -72,4 +72,10 @@ public class PostServiceImpl implements PostService {
             save(post);
         });
     }
+
+    @Override
+    public List<Post> getPostsWithMention() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return postRepository.getPostsWithMention(authentication.getName());
+    }
 }

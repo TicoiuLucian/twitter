@@ -51,5 +51,11 @@ public class PostController {
         return "redirect:/post/own";
     }
 
+    @GetMapping(value = "/mentions")
+    public String getPostWithMentions(Model model) {
+        model.addAttribute("posts", postService.getPostsWithMention());
+        return "post-mentions";
+    }
+
 
 }

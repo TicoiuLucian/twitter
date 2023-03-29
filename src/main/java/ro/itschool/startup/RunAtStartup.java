@@ -65,7 +65,7 @@ public class RunAtStartup {
         springUser2.setAccountNonExpired(true);
         springUser2.setAccountNonLocked(true);
         springUser2.setCredentialsNonExpired(true);
-        Set<Post> posts2 = Set.of(new Post(" lticoiu message post 1", LocalDateTime.now(), springUser2),
+        Set<Post> posts2 = Set.of(new Post(" lticoiu message post 1 user", LocalDateTime.now(), springUser2),
                 new Post("lticoiu message post 2", LocalDateTime.now(), springUser2),
                 new Post("lticoiu message post 3", LocalDateTime.now(), springUser2));
         springUser2.setPosts(posts2);

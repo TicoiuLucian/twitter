@@ -11,5 +11,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query(value = "Select * from post where user_id = ?", nativeQuery = true)
     List<Post> findByUserId(Integer userId);
 
-
+    @Query(value = "Select * from post where message LIKE %:keyword%", nativeQuery = true)
+    List<Post> getPostsWithMention(String keyword);
 }
