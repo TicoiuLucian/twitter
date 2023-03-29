@@ -25,6 +25,8 @@
         <tr th:each="post: ${posts}">
             <td><span th:text="${post.message}">  </span></td>
             <td><span th:text="${post.timestamp}">  </span></td>
+            <td><span th:text="${post.likes}">  </span></td>
+
             <td>
                 <a th:href="@{/post/delete/{id}(id=${post.id})}"
                    style="color:black" class="fa fa-trash"></a>

@@ -28,6 +28,12 @@ public class SpringUserController {
         return "redirect:/users";
     }
 
+    @RequestMapping(value = "/unfollow/{id}")
+    public String unfollowUser(@PathVariable Integer id) {
+        myUserService.unfollowUser(id);
+        return "redirect:/users";
+    }
+
     @GetMapping(value = "/followed")
     public String getFollowedUsers(Model model) {
         model.addAttribute("followedUsers", myUserService.getFollowedUsers());

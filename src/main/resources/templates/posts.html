@@ -35,6 +35,15 @@
                    style="color:black" class="fa-solid fa-copy"></a>
             </td>
 
+            <td>
+                <a th:href="@{/post/like/{id}(id=${post.id})}"
+                   style="color:black" class="fa-regular fa-thumbs-up"></a>
+            </td>
+            <td>
+                <a th:href="@{/post/unlike/{id}(id=${post.id})}"
+                   style="color:black" class="fa-regular fa-thumbs-down"></a>
+            </td>
+
         </tr>
         </tbody>
     </table>

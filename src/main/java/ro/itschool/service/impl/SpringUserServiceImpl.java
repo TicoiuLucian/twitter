@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ro.itschool.entity.Role;
 import ro.itschool.entity.SpringUser;
+import ro.itschool.repository.PostRepository;
 import ro.itschool.repository.RoleRepository;
 import ro.itschool.repository.SpringUserRepository;
 import ro.itschool.service.SpringUserService;
@@ -24,9 +25,10 @@ public class SpringUserServiceImpl implements SpringUserService, UserDetailsServ
 
     @Autowired
     private SpringUserRepository springUserRepository;
-
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     @Override
     public SpringUser registerUser(SpringUser receivedUser) { //received User from FE
@@ -89,7 +91,20 @@ public class SpringUserServiceImpl implements SpringUserService, UserDetailsServ
 
     @Override
     public void deleteById(Integer id) {
-        springUserRepository.deleteById(id);
+        Optional<SpringUser> springUser = springUserRepository.findById(id);
+        springUser.ifPresent(user -> {
+            springUserRepository.deleteFollower(id);
+            postRepository.deleteByUserId(user.getId());
+            springUserRepository.deleteById(id);
+        });
+    }
+
+    @Override
+    public void unfollowUser(Integer id) {
+        Optional<SpringUser> toBeFollowed = springUserRepository.findById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SpringUser loggedInUser = springUserRepository.findByUsername(authentication.getName());
+        toBeFollowed.ifPresent(user -> springUserRepository.deleteFromFollowTable(loggedInUser.getId(), user.getId()));
     }
 
     private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {

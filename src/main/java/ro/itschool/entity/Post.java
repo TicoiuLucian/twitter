@@ -29,7 +29,7 @@ public class Post {
     @OneToMany
     private Set<Reply> replies = new LinkedHashSet<>();
 
-    @ManyToMany(mappedBy = "likes")
+    @ManyToMany(mappedBy = "likes", fetch = FetchType.EAGER)
     private Set<SpringUser> likes = new LinkedHashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)

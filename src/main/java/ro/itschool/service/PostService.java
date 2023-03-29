@@ -20,4 +20,8 @@ public interface PostService {
     void copyPost(Integer id);
 
     List<Post> getPostsWithMention();
+
+    void likePost(Integer id);
+
+    void unlikePost(Integer id);
 }

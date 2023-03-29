@@ -33,14 +33,14 @@ public class PostController {
     }
 
     @GetMapping(value = "/add")
-    public String registerForm(Model model) {
+    public String addPost(Model model) {
         Post post = new Post();
         model.addAttribute("post", post);
         return "add-post";
     }
 
     @PostMapping(value = "/add")
-    public String registerUser(@ModelAttribute("post") @RequestBody Post post) {
+    public String addPost(@ModelAttribute("post") @RequestBody Post post) {
         postService.save(post);
         return "redirect:/post/own";
     }
@@ -55,6 +55,18 @@ public class PostController {
     public String getPostWithMentions(Model model) {
         model.addAttribute("posts", postService.getPostsWithMention());
         return "post-mentions";
+    }
+
+    @RequestMapping(value = "/like/{id}")
+    public String likePost(@PathVariable Integer id) {
+        postService.likePost(id);
+        return "redirect:/post/all";
+    }
+
+    @RequestMapping(value = "/unlike/{id}")
+    public String unlikePost(@PathVariable Integer id) {
+        postService.unlikePost(id);
+        return "redirect:/post/all";
     }
 
 

@@ -24,4 +24,6 @@ public interface SpringUserService {
     List<SpringUser> getFollowedUsers();
 
     void deleteById(Integer id);
+
+    void unfollowUser(Integer id);
 }

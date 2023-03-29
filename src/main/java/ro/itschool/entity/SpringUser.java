@@ -105,4 +105,9 @@ public class SpringUser implements UserDetails {
         this.firstName = firstName;
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return username;
+    }
 }

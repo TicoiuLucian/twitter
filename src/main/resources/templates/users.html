@@ -45,6 +45,7 @@
             <th> Username</th>
             <th> Mail</th>
             <th> Follow</th>
+            <th> Unfollow</th>
             <th> Delete</th>
         </tr>
         </thead>
@@ -58,6 +59,10 @@
             <td>
                 <a th:href="@{/users/follow/{id}(id=${user.id})}"
                    style="color:black" class="fa-brands fa-twitter"></a>
+            </td>
+            <td>
+                <a th:href="@{/users/unfollow/{id}(id=${user.id})}"
+                   style="color:black" class="fa-solid fa-hashtag"></a>
             </td>
             <td>
                 <a th:href="@{/users/delete/{id}(id=${user.id})}"

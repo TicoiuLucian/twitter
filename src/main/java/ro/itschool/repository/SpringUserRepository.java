@@ -32,4 +32,14 @@ public interface SpringUserRepository extends JpaRepository<SpringUser, Integer>
             WHERE a.user_id = ?;
                """, nativeQuery = true)
     List<Object[]> getFollowedUsers(Integer id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM follow WHERE followed_id = ?", nativeQuery = true)
+    void deleteFollower(Integer id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM follow WHERE follower_id = :followerId and followed_id = :followedId", nativeQuery = true)
+    void deleteFromFollowTable(@Param("followerId") Integer followerId, @Param("followedId") Integer followedId);
 }

@@ -43,7 +43,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deleteById(Integer id) {
-        postRepository.deleteById(id);
+        Optional<Post> post = postRepository.findById(id);
+        post.ifPresent(p -> {
+            p.setSpringUser(null);
+            postRepository.save(p);
+            postRepository.deleteByPostId(id);
+            postRepository.deleteById(id);
+        });
     }
 
     @Override
@@ -77,5 +83,19 @@ public class PostServiceImpl implements PostService {
     public List<Post> getPostsWithMention() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return postRepository.getPostsWithMention(authentication.getName());
+    }
+
+    @Override
+    public void likePost(Integer postId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SpringUser loggedInUser = springUserRepository.findByUsername(authentication.getName());
+        postRepository.likePost(loggedInUser.getId(), postId);
+    }
+
+    @Override
+    public void unlikePost(Integer postId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SpringUser loggedInUser = springUserRepository.findByUsername(authentication.getName());
+        postRepository.unlikePost(loggedInUser.getId(), postId);
     }
 }
