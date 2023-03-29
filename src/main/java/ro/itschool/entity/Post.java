@@ -29,9 +29,6 @@ public class Post {
     @OneToMany
     private Set<Reply> replies = new LinkedHashSet<>();
 
-    @ManyToMany(mappedBy = "mentions")
-    private Set<SpringUser> mentions = new LinkedHashSet<>();
-
     @ManyToMany(mappedBy = "likes")
     private Set<SpringUser> likes = new LinkedHashSet<>();
 

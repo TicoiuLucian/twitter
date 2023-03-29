@@ -34,7 +34,6 @@ public class SpringUser implements UserDetails {
     @Column(nullable = false, length = 30, unique = true)
     private String email;
 
-    //Required By Spring security
     private boolean accountNonExpired;
 
     private boolean accountNonLocked;
@@ -52,12 +51,6 @@ public class SpringUser implements UserDetails {
 
     @Transient
     private List<GrantedAuthority> authorities = null;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "mention",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "post_id"))
-    private Set<Post> mentions = new LinkedHashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "likes",
